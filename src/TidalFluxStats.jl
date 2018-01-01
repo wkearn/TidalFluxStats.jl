@@ -1,5 +1,10 @@
 module TidalFluxStats
 
-# package code goes here
+using TidalFluxQuantities
+
+export tidalbalance,
+    tidalaverage
+
+include("averages.jl")
 
 end # module
