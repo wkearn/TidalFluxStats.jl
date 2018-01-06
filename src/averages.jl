@@ -13,6 +13,8 @@ function edgeindices(mask)
     irise,ifall
 end
 
+edgeindices(mask::Mask) = edgeindices(quantity(mask))
+
 """
 Take a mask and return the times of the rising and falling edges
 """
