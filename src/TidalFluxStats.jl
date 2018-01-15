@@ -3,7 +3,8 @@ module TidalFluxStats
 using TidalFluxQuantities
 
 export tidalbalance,
-    tidalaverage
+    tidalaverage,
+    segment
 
 include("averages.jl")
 
