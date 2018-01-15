@@ -43,6 +43,12 @@ function average(f,ts)
     fi./Dates.value.(Dates.Second.(ts[end]-ts[1]))
 end
 
+function segment(q,mask)
+    ts,qs = unzip(q)
+    irise,ifall = edgeindices(mask)
+    [qs[irise[i]:ifall[i]] for i in eachindex(irise)]    
+end
+
 """
 Integrate a flux over tides given in the mask.
 
