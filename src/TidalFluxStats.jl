@@ -4,8 +4,10 @@ using TidalFluxQuantities
 
 export tidalbalance,
     tidalaverage,
-    segment
+    segment,
+    superimpose
 
 include("averages.jl")
+include("superimpose.jl")
 
 end # module
