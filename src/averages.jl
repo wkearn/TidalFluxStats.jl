@@ -46,7 +46,9 @@ end
 function segment(q,mask)
     ts,qs = unzip(q)
     irise,ifall = edgeindices(mask)
-    [qs[irise[i]:ifall[i]] for i in eachindex(irise)]    
+    st = [ts[irise[i]:ifall[i]] for i in eachindex(irise)]
+    sq = [qs[irise[i]:ifall[i]] for i in eachindex(irise)]
+    st,sq
 end
 
 """
