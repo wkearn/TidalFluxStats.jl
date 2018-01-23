@@ -5,9 +5,11 @@ using TidalFluxQuantities
 export tidalbalance,
     tidalaverage,
     segment,
-    superimpose
+    superimpose,
+    adjustbias
 
 include("averages.jl")
 include("superimpose.jl")
+include("bias.jl")
 
 end # module
