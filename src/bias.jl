@@ -8,5 +8,19 @@ function adjustbias(Q::Discharge,T::Quantity,M::Mask)
     t,Fo = tidalbalance(F,M) # Observed material balance
     _,To = tidalbalance(T,M) # Tidal integral of T balance
     _,μ = tidalaverage(Q,M) # Observed average water balance
-    Fo.-μ.*To #
+    t,Fo.-μ.*To
+end
+
+function adjustbias_average(Q::Discharge,T::Quantity,M::Mask)
+    F = T*Q
+    t,Fo = tidalaverage(F,M)
+    _,To = tidalaverage(T,M)
+    _,μ  = tidalaverage(Q,M)
+    t,Fo.-μ.*To
+end
+
+function adjustbias_discharge(Q::Discharge,M::Mask)
+    t,Qs = segment(Q,M)
+    _,μ = tidalaverage(Q,M)
+    t,Qs.-μ
 end

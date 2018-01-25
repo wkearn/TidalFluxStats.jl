@@ -6,10 +6,15 @@ export tidalbalance,
     tidalaverage,
     segment,
     superimpose,
-    adjustbias
+    adjustbias,
+    adjustbias_average,
+    adjustbias_discharge,
+    prism,
+    adjustbias_prism
 
 include("averages.jl")
 include("superimpose.jl")
 include("bias.jl")
+include("prism.jl")
 
 end # module
