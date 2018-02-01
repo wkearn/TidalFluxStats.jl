@@ -40,6 +40,8 @@ function integrate(f,ts)
     sum(dt.*(f1+f2)/2)
 end
 
+integrate(q::Quantity) = integrate(quantity(q),times(q))
+
 """
 Average f sampled at times ts with a trapezoid rule
 """
@@ -47,6 +49,8 @@ function average(f,ts)
     fi = integrate(f,ts)
     fi./Dates.value.(Dates.Second.(ts[end]-ts[1]))
 end
+
+average(q::Quantity) = average(quantity(q),times(q))
 
 function segment(q,mask)
     ts,qs = unzip(q)
