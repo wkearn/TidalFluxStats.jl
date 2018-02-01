@@ -7,8 +7,13 @@ function edgeindices(mask)
     dm = [0;diff(mask)]
     irise = find(dm.==1)
     ifall = find(dm.==-1)
-    if length(irise) .!= length(ifall)
-        warn("The number of upcrossings does not match the number of downcrossings")
+    # Drop the first ifall if it is before the first irise
+    if ifall[1]<irise[1]
+        ifall = ifall[2:end]
+    end
+    # Drop the last irise if it is after the last ifall
+    if irise[end]>ifall[end]
+        irise = irise[1:end-1]
     end
     irise,ifall
 end
