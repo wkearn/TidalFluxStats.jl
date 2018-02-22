@@ -24,3 +24,17 @@ function adjustbias_discharge(Q::Discharge,M::Mask)
     _,μ = tidalaverage(Q,M)
     t,Qs.-μ
 end
+
+# We want a way to concatenate discharges that have been adjusted,
+# while filling (with zeros?) in outside the mask
+function adjustbias_dischargefill(Q::Discharge,M::Mask)
+    irise,ifall = edgeindices(M)
+    t,Qs = segment(Q,M)
+    _,μ = tidalaverage(Q,M)
+    Qb = Qs.-μ
+    B = zeros(length(Q))
+    for i in 1:length(Qb)
+        B[irise[i]:ifall[i]] = Qb[i]
+    end
+    Discharge(times(Q),B)
+end
