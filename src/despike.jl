@@ -1,3 +1,26 @@
+"""
+    Despike{R}(reference::Function,n,k)
+    (d::Despike)(q::Quantity)
+
+Remove spikes from a Quantity
+
+Despike applies a function (`reference`)
+to a moving window of size `k` to compute
+a reference time series. 
+
+Spikes are defined as those points lying `n` times
+the standard deviation of the residuals away from 
+the reference time series.
+
+What it does with the spikes depends on the 
+value of the type parameter `R`
+
+`R` can be one of 
+
+- `:filter`: Replace the entire time series with the reference series
+- `:reference`: Replace identified spikes with the reference series
+- `:nan`: Replace spikes with NaN
+"""
 struct Despike{R}
     reference::Function
     n
