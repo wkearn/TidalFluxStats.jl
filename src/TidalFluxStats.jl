@@ -16,5 +16,6 @@ include("averages.jl")
 include("superimpose.jl")
 include("bias.jl")
 include("prism.jl")
+include("despike.jl")
 
 end # module
