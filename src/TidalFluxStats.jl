@@ -10,7 +10,8 @@ export tidalbalance,
     adjustbias_average,
     adjustbias_discharge,
     prism,
-    adjustbias_prism
+    adjustbias_prism,
+    Despike
 
 include("averages.jl")
 include("superimpose.jl")
