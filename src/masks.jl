@@ -20,6 +20,6 @@ from computations.
 - `t` : the percentage of good data points required
 """
 function average_mask(dm::Mask,m::Mask,t)
-    tm,Tm = tidalaverage(MaskInt(dm),m)
-    tm,Tm.>t
+    Tm = tidalaverage(MaskInt(dm),m)
+    Mask(times(Tm),Array{Bool}(quantity(Tm).>t))
 end
