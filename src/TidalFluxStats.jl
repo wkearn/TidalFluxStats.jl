@@ -18,5 +18,6 @@ include("superimpose.jl")
 include("bias.jl")
 include("prism.jl")
 include("despike.jl")
+include("masks.jl")
 
 end # module
