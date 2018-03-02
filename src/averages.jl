@@ -1,5 +1,10 @@
 # Tidal averages
 
+struct TidalAverage{T<:Quantity} <: Quantity{Float64}
+    ts
+    q
+end
+
 """
 Take a mask and return the indices of the rising and falling edges
 """
@@ -72,18 +77,19 @@ function tidalbalance(f,mask)
     tmid = trise + (tfall-trise)/2
     avg = [integrate(fs[irise[i]:ifall[i]],
                      ts[irise[i]:ifall[i]]) for i in eachindex(irise)]
-    tmid,avg
+    TidalAverage(tmid,avg)
 end
 
-function tidalaverage(f,mask)
+function tidalaverage{T<:Quantity}(f::T,mask)
     ts,fs = unzip(f)
     irise,ifall = edgeindices(mask)
     trise,tfall = edgetimes(mask,ts)
     tmid = trise + (tfall-trise)/2
     avg = [average(fs[irise[i]:ifall[i]],
                    ts[irise[i]:ifall[i]]) for i in eachindex(irise)]
-    tmid,avg
+    TidalAverage{T}(tmid,avg)
 end
+
 
 """
 Compute the flood-ebb differential of f
@@ -92,6 +98,7 @@ q determines flood vs. ebb conditions
 """
 function flood_ebb{T<:Quantity}(f::T,q,mask)
     ts,fs = unzip(f)
-    fs[quantity(q).<0] .*= -1
-    tidalaverage(T(ts,fs),mask)
+    f2 = fs[:]
+    f2[quantity(q).<0] .*= -1
+    tidalaverage(T(ts,f2),mask)
 end
