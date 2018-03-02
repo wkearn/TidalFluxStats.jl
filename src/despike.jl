@@ -48,3 +48,9 @@ function (d::Despike{:nan}){T<:Quantity}(q::T)
     newQ[idxs] = NaN
     T(times(q),newQ)
 end
+
+function threshold{T<:Quantity}(q::T,t,z)
+    newQ = quantity(q)[:]
+    newQ[newQ.>t] = z
+    T(times(q),newQ)
+end
