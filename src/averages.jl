@@ -81,6 +81,17 @@ function tidalaverage(f,mask)
     trise,tfall = edgetimes(mask,ts)
     tmid = trise + (tfall-trise)/2
     avg = [average(fs[irise[i]:ifall[i]],
-                     ts[irise[i]:ifall[i]]) for i in eachindex(irise)]
+                   ts[irise[i]:ifall[i]]) for i in eachindex(irise)]
     tmid,avg
+end
+
+"""
+Compute the flood-ebb differential of f
+
+q determines flood vs. ebb conditions
+"""
+function flood_ebb{T<:Quantity}(f::T,q,mask)
+    ts,fs = unzip(f)
+    fs[quantity(q).<0] .*= -1
+    tidalaverage(T(ts,fs),mask)
 end
